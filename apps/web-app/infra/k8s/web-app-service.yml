@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "#GOOGLE_PROJECT_ID#-web-app-service" # Name of Service
+spec: # Service's specification
+  type: NodePort
+  selector:
+    app: "#GOOGLE_PROJECT_ID#-web-app"
+  ports:
+    - name: https
+      port: 8087 # Service's port
+      protocol: TCP
+      targetPort: 80

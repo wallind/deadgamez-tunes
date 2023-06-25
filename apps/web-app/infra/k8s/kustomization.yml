@@ -1,0 +1,6 @@
+resources:
+  - web-app-deployment.yml
+  - web-app-service.yml
+  - ingress.yml
+  - cert-manager-issuer.yml
+  - tls-secret.yml

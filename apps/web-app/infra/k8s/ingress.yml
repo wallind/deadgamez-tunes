@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "#GOOGLE_PROJECT_ID#-ingress"
+  annotations:
+    # This tells Google Cloud to create an External Load Balancer to realize this Ingress
+    kubernetes.io/ingress.class: gce
+    # This disables plain HTTP connections from Internet clients
+    kubernetes.io/ingress.allow-http: "false"
+    # This tells Google Cloud to associate the External Load Balancer with the static IP which we created earlier
+    kubernetes.io/ingress.global-static-ip-name: "#GOOGLE_PROJECT_ID#-cluster-ingress"
+
+    cert-manager.io/issuer: "#GOOGLE_PROJECT_ID#-cert-issuer"
+spec:
+  rules:
+    - host: "#FRONTEND_DOMAIN_NAME#"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: "#GOOGLE_PROJECT_ID#-web-app-service"
+                port:
+                  number: 8087
+  tls:
+    - secretName: "#GOOGLE_PROJECT_ID#-cert"
+      hosts:
+        - "#FRONTEND_DOMAIN_NAME#"

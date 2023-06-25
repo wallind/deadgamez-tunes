@@ -1,0 +1,6 @@
+**/.terraform/
+
+**/.env
+
+# TEMP ignored for committing safely until I have proper CI/CD
+/env/dev/.terraform.lock.hcl

@@ -1,0 +1,23 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: "#GOOGLE_PROJECT_ID#-web-app"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "#GOOGLE_PROJECT_ID#-web-app"
+  template:
+    metadata:
+      labels:
+        app: "#GOOGLE_PROJECT_ID#-web-app"
+    spec:
+      containers:
+        - name: "#GOOGLE_PROJECT_ID#-web-app"
+          image: "gcr.io/#GOOGLE_PROJECT_ID#/#GOOGLE_PROJECT_ID#-web-app:latest"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: gcr-json-key
